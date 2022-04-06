@@ -9,7 +9,8 @@ countOpinions = foreach comentaris_group
   {
       labels_pos = FILTER comentaris BY label == 1;
       labels_neg = FILTER comentaris BY label == 0;
-      GENERATE group as id, COUNT(comentaris.id) as n_comentaris, COUNT(labels_pos) as labels_pos, COUNT(labels_neg) as labels_neg;
+      labels_total = COUNT(labels_pos)-COUNT(labels_neg);
+      GENERATE group as id, COUNT(comentaris.id) as n_comentaris, COUNT(labels_pos) as labels_pos, COUNT(labels_neg) as labels_neg, labels_total as labels_total;
   }
 
 /* Amb la clausula join, ajuntem les pelicules amb el seu n_opinions, les labels positives i les labels negatives */
